@@ -17,7 +17,7 @@ public class FrenchStrategy : IRegistrationStrategy
 
     public string StrategyCountryCode { get; set; } = CountryCodes.France;
     
-    public async Task HandleRequest(VatRegistrationRequest request)
+    public async Task HandleRequestAsync(VatRegistrationRequest request)
     {
         var csvBuilder = new StringBuilder();
         csvBuilder.AppendLine("CompanyName,CompanyId");

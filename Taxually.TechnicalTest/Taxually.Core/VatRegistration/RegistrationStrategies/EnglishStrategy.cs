@@ -16,7 +16,7 @@ public class EnglishStrategy : IRegistrationStrategy
 
     public string StrategyCountryCode { get; set; } = CountryCodes.England;
     
-    public async Task HandleRequest(VatRegistrationRequest request)
+    public async Task HandleRequestAsync(VatRegistrationRequest request)
     {
         await _httpClient.PostAsync("https://api.uktax.gov.uk", request);
     }

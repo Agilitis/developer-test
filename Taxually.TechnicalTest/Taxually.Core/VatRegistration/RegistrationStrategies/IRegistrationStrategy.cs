@@ -6,5 +6,5 @@ public interface IRegistrationStrategy
 {
     public string StrategyCountryCode { get; set; }
 
-    public Task HandleRequest(VatRegistrationRequest request);
+    public Task HandleRequestAsync(VatRegistrationRequest request);
 }

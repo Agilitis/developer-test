@@ -1,10 +1,10 @@
-namespace Taxually.Ports.Inbound.Vat;
+﻿namespace Taxually.Ports.Inbound.Vat;
 
 public record VatRegistrationRequest
 {
-    public string CompanyName { get; }
+    public string CompanyName { get; init; }
     
-    public string CompanyId { get; }
+    public string CompanyId { get; init; }
     
-    public string Country { get; }
+    public string Country { get; init; }
 }

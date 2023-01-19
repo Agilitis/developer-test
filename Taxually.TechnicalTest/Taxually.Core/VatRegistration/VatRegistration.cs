@@ -21,6 +21,6 @@ public class VatRegistration : IVatRegistration
             throw new Exception("Country not supported");
         }
 
-        await registrationStrategy.HandleRequest(vatRegistrationRequest);
+        await registrationStrategy.HandleRequestAsync(vatRegistrationRequest);
     }
 }

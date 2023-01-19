@@ -17,7 +17,7 @@ public class GermanStrategy : IRegistrationStrategy
 
     public string StrategyCountryCode { get; set; } = CountryCodes.Germany;
     
-    public async Task HandleRequest(VatRegistrationRequest request)
+    public async Task HandleRequestAsync(VatRegistrationRequest request)
     {
         await using var stringWriter = new StringWriter();
         var serializer = new XmlSerializer(typeof(VatRegistrationRequest));
