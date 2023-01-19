@@ -1,3 +1,5 @@
+using Taxually.Adapters.Http;
+using Taxually.Adapters.Queue;
 using Taxually.Core;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddCoreServices();
+builder.Services.AddHttpAdapterServices();
+builder.Services.AddQueueClientServices();
+
 
 var app = builder.Build();
 
