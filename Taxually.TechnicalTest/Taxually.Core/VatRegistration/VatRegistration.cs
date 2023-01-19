@@ -1,12 +1,6 @@
-﻿using System.Text;
-using System.Xml.Serialization;
-using Taxually.Core.Models;
-using Taxually.Core.VatRegistration.RegistrationStrategies;
-using Taxually.Core.VatRegistration.RegistrationStrategies.Abstractions;
+﻿using Taxually.Core.VatRegistration.RegistrationStrategies.Abstractions;
 using Taxually.Ports.Inbound.Vat;
 using Taxually.Ports.Inbound.Vat.Interfaces;
-using Taxually.Ports.Outbound.Http;
-using Taxually.Ports.Outbound.Queue;
 
 namespace Taxually.Core.VatRegistration;
 

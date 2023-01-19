@@ -1,5 +1,4 @@
-﻿using Taxually.Core.Models;
-using Taxually.Ports.Inbound.Vat;
+﻿using Taxually.Ports.Inbound.Vat;
 
 namespace Taxually.Core.VatRegistration.RegistrationStrategies.Abstractions;
 
