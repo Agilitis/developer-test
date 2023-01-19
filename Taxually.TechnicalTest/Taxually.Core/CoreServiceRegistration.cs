@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Taxually.Core.VatRegistration.RegistrationStrategies;
+using Taxually.Core.VatRegistration.RegistrationStrategies.Abstractions;
 using Taxually.Ports.Inbound.Vat.Interfaces;
 
 
@@ -9,6 +11,9 @@ public static class CoreServiceRegistration
     public static IServiceCollection AddCoreServices(this IServiceCollection services)
     {
         services.AddTransient<IVatRegistration, VatRegistration.VatRegistration>();
+        services.AddTransient<IRegistrationStrategy, GermanStrategy>();
+        services.AddTransient<IRegistrationStrategy, FrenchStrategy>();
+        services.AddTransient<IRegistrationStrategy, EnglishStrategy>();
         return services;
     }
 }
