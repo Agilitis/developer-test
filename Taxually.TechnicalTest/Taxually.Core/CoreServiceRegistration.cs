@@ -10,10 +10,10 @@ public static class CoreServiceRegistration
 {
     public static IServiceCollection AddCoreServices(this IServiceCollection services)
     {
-        services.AddTransient<IVatRegistration, VatRegistration.VatRegistration>();
         services.AddTransient<IRegistrationStrategy, GermanStrategy>();
         services.AddTransient<IRegistrationStrategy, FrenchStrategy>();
         services.AddTransient<IRegistrationStrategy, EnglishStrategy>();
+        services.AddTransient<IVatRegistration, VatRegistration.VatRegistration>();
         return services;
     }
 }

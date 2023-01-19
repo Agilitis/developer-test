@@ -6,9 +6,9 @@ namespace Taxually.Core.VatRegistration;
 
 public class VatRegistration : IVatRegistration
 {
-    private readonly IReadOnlyCollection<IRegistrationStrategy> _registrationStrategies;
+    private readonly IEnumerable<IRegistrationStrategy> _registrationStrategies;
 
-    public VatRegistration(IReadOnlyCollection<IRegistrationStrategy> registrationStrategies)
+    public VatRegistration(IEnumerable<IRegistrationStrategy> registrationStrategies)
     {
         _registrationStrategies = registrationStrategies;
     }

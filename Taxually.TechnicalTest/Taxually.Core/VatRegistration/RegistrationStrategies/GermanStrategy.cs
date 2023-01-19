@@ -21,7 +21,7 @@ public class GermanStrategy : IRegistrationStrategy
     {
         await using var stringWriter = new StringWriter();
         var serializer = new XmlSerializer(typeof(VatRegistrationRequest));
-        serializer.Serialize(stringWriter, this);
+        serializer.Serialize(stringWriter, request);
         var xml = stringWriter.ToString();
         await _queueClient.EnqueueAsync("vat-registration-xml", xml);
     }

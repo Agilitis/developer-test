@@ -11,10 +11,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddCoreServices();
 builder.Services.AddHttpAdapterServices();
 builder.Services.AddQueueClientServices();
-
+builder.Services.AddCoreServices();
 
 var app = builder.Build();
 
