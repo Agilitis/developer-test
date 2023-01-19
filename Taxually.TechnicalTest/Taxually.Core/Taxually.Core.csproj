@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Taxually.Ports.Inbound\Taxually.Ports.Inbound.csproj" />
+      <ProjectReference Include="..\Taxually.Ports.Outbound\Taxually.Ports.Outbound.csproj" />
       <ProjectReference Include="..\Taxually.TechnicalTest\Taxually.TechnicalTest.csproj" />
     </ItemGroup>
 

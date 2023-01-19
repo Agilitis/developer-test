@@ -2,20 +2,29 @@
 using System.Xml.Serialization;
 using Taxually.Ports.Inbound.Vat;
 using Taxually.Ports.Inbound.Vat.Interfaces;
-using Taxually.TechnicalTest;
+using Taxually.Ports.Outbound.Http;
+using Taxually.Ports.Outbound.Queue;
 
 namespace Taxually.Core.VatRegistration;
 
 public class VatRegistration : IVatRegistration
 {
+    private readonly ITaxuallyHttpClient _httpClient;
+    private readonly ITaxuallyQueueClient _queueClient;
+
+    public VatRegistration(ITaxuallyHttpClient httpClient, ITaxuallyQueueClient queueClient)
+    {
+        _httpClient = httpClient;
+        _queueClient = queueClient;
+    }
+
     public async Task RegisterAsync(VatRegistrationRequest vatRegistrationRequest)
     {
         switch (vatRegistrationRequest.Country)
         {
             case "GB":
                 // UK has an API to register for a VAT number
-                var httpClient = new TaxuallyHttpClient();
-                httpClient.PostAsync("https://api.uktax.gov.uk", vatRegistrationRequest).Wait();
+                _httpClient.PostAsync("https://api.uktax.gov.uk", vatRegistrationRequest).Wait();
                 break;
             case "FR":
                 // France requires an excel spreadsheet to be uploaded to register for a VAT number
@@ -23,9 +32,8 @@ public class VatRegistration : IVatRegistration
                 csvBuilder.AppendLine("CompanyName,CompanyId");
                 csvBuilder.AppendLine($"{vatRegistrationRequest.CompanyName}{vatRegistrationRequest.CompanyId}");
                 var csv = Encoding.UTF8.GetBytes(csvBuilder.ToString());
-                var excelQueueClient = new TaxuallyQueueClient();
                 // Queue file to be processed
-                await excelQueueClient.EnqueueAsync("vat-registration-csv", csv);
+                await _queueClient.EnqueueAsync("vat-registration-csv", csv);
                 break;
             case "DE":
                 // Germany requires an XML document to be uploaded to register for a VAT number
@@ -34,9 +42,8 @@ public class VatRegistration : IVatRegistration
                     var serializer = new XmlSerializer(typeof(VatRegistrationRequest));
                     serializer.Serialize(stringWriter, this);
                     var xml = stringWriter.ToString();
-                    var xmlQueueClient = new TaxuallyQueueClient();
                     // Queue xml doc to be processed
-                    await xmlQueueClient.EnqueueAsync("vat-registration-xml", xml);
+                    await _queueClient.EnqueueAsync("vat-registration-xml", xml);
                 }
                 break;
             default:
