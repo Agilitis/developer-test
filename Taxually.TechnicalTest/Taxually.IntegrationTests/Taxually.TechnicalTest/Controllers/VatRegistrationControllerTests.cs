@@ -4,10 +4,7 @@ using System.Text;
 using System.Text.Json;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
-using NSubstitute;
-using Taxually.Ports.Inbound.Vat;
-using Taxually.Ports.Inbound.Vat.Interfaces;
-using Taxually.TechnicalTest.Controllers;
+using Taxually.Ports.Inbound.VatRegistration.Models;
 
 namespace Taxually.IntegrationTests.Taxually.TechnicalTest.Controllers;
 
@@ -28,7 +25,7 @@ public class VatRegistrationControllerTests : WebApplicationFactory<Program>
         
         var vatRequest = new VatRegistrationRequest
         {
-            Country = "GB",
+            Country = "DE",
             CompanyId = "1",
             CompanyName = "name"
         };

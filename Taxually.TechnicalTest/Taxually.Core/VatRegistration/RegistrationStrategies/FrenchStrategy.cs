@@ -1,7 +1,5 @@
-﻿using System.Text;
-using Taxually.Core.Models;
-using Taxually.Core.VatRegistration.RegistrationStrategies.Abstractions;
-using Taxually.Ports.Inbound.Vat;
+﻿using Taxually.Core.Models;
+using Taxually.Core.Models.VatRegistration;
 using Taxually.Ports.Outbound.Queue;
 
 namespace Taxually.Core.VatRegistration.RegistrationStrategies;
@@ -17,12 +15,10 @@ public class FrenchStrategy : IRegistrationStrategy
 
     public string StrategyCountryCode { get; set; } = CountryCodes.France;
     
-    public async Task HandleRequestAsync(VatRegistrationRequest request)
+    public async Task HandleRequestAsync(IVatRegistrationRequest request)
     {
-        var csvBuilder = new StringBuilder();
-        csvBuilder.AppendLine("CompanyName,CompanyId");
-        csvBuilder.AppendLine($"{request.CompanyName}{request.CompanyId}");
-        var csv = Encoding.UTF8.GetBytes(csvBuilder.ToString());
+        var csv = request.GetCsv();
+        
         await _queueClient.EnqueueAsync("vat-registration-csv", csv);
     }
 }

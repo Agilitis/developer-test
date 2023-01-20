@@ -1,7 +1,5 @@
-﻿using System.Xml.Serialization;
-using Taxually.Core.Models;
-using Taxually.Core.VatRegistration.RegistrationStrategies.Abstractions;
-using Taxually.Ports.Inbound.Vat;
+﻿using Taxually.Core.Models;
+using Taxually.Core.Models.VatRegistration;
 using Taxually.Ports.Outbound.Queue;
 
 namespace Taxually.Core.VatRegistration.RegistrationStrategies;
@@ -17,12 +15,10 @@ public class GermanStrategy : IRegistrationStrategy
 
     public string StrategyCountryCode { get; set; } = CountryCodes.Germany;
     
-    public async Task HandleRequestAsync(VatRegistrationRequest request)
+    public async Task HandleRequestAsync(IVatRegistrationRequest request)
     {
-        await using var stringWriter = new StringWriter();
-        var serializer = new XmlSerializer(typeof(VatRegistrationRequest));
-        serializer.Serialize(stringWriter, request);
-        var xml = stringWriter.ToString();
+        var xml = await request.GetXmlAsync();
+        
         await _queueClient.EnqueueAsync("vat-registration-xml", xml);
     }
 }

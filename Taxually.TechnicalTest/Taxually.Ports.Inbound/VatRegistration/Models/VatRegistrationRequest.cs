@@ -1,4 +1,4 @@
-﻿namespace Taxually.Ports.Inbound.Vat;
+﻿namespace Taxually.Ports.Inbound.VatRegistration.Models;
 
 public record VatRegistrationRequest
 {

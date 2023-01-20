@@ -1,5 +1,5 @@
-﻿using Taxually.Core.VatRegistration.RegistrationStrategies;
-using Taxually.Ports.Inbound.Vat;
+﻿using Taxually.Core.Models.VatRegistration;
+using Taxually.Core.VatRegistration.RegistrationStrategies;
 using Taxually.Ports.Outbound.Http;
 
 namespace Taxually.UnitTests.VatRegistration.RegistrationStrategies;
@@ -15,16 +15,14 @@ public class EnglishStrategyTests
         var englishStrategy = new EnglishStrategy(_httpClient);
         var fakeRequest = new VatRegistrationRequest
         {
-            CompanyName = "fakeCompany",
-            Country = "fakeCountry",
-            CompanyId = "1"
+            CompanyId = "1",
+            CompanyName = "fakeCompany"
         };
-
+        
         await englishStrategy.HandleRequestAsync(fakeRequest);
 
         await _httpClient.Received(1).PostAsync(Arg.Any<string>(),
-            Arg.Is<VatRegistrationRequest>(request => request.Country == "fakeCountry" && 
-                                                      request.CompanyId == "1" &&
+            Arg.Is<IVatRegistrationRequest>(request => request.CompanyId == "1" &&
                                                       request.CompanyName == "fakeCompany"));
     }
 }

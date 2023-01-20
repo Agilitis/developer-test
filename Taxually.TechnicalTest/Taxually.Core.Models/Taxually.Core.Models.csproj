@@ -6,4 +6,14 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Taxually.Ports.Inbound\Taxually.Ports.Inbound.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Taxually.Core">
+        <HintPath>..\Taxually.IntegrationTests\bin\Debug\net6.0\Taxually.Core.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

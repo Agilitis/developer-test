@@ -1,6 +1,7 @@
-﻿using Taxually.Core.VatRegistration.RegistrationStrategies.Abstractions;
-using Taxually.Ports.Inbound.Vat;
+﻿using System.Text;
+using Taxually.Core.VatRegistration.RegistrationStrategies;
 using Taxually.Ports.Inbound.Vat.Interfaces;
+using Taxually.Ports.Inbound.VatRegistration.Models;
 
 namespace Taxually.Core.VatRegistration;
 
@@ -21,6 +22,21 @@ public class VatRegistration : IVatRegistration
             throw new Exception("Country not supported");
         }
 
-        await registrationStrategy.HandleRequestAsync(vatRegistrationRequest);
+        var coreRegistrationRequest = new Models.VatRegistration.VatRegistrationRequest()
+        {
+            CompanyId = vatRegistrationRequest.CompanyId,
+            CompanyName = vatRegistrationRequest.CompanyName
+        };
+
+        await registrationStrategy.HandleRequestAsync(coreRegistrationRequest);
+    }
+
+    public byte[] GetCsvFor(VatRegistrationRequest request)
+    {
+        var csvBuilder = new StringBuilder();
+        csvBuilder.AppendLine("CompanyName,CompanyId");
+        csvBuilder.AppendLine($"{request.CompanyName}{request.CompanyId}");
+        var csv = Encoding.UTF8.GetBytes(csvBuilder.ToString());
+        return csv;
     }
 }

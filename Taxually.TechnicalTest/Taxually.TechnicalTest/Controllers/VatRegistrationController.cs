@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Taxually.Ports.Inbound.Vat;
 using Taxually.Ports.Inbound.Vat.Interfaces;
+using Taxually.Ports.Inbound.VatRegistration.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
