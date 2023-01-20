@@ -6,7 +6,7 @@ using Taxually.Ports.Inbound.Vat.Interfaces;
 
 namespace Taxually.TechnicalTest.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/VatRegistration")]
     [ApiController]
     public class VatRegistrationController : ControllerBase
     {
@@ -21,6 +21,7 @@ namespace Taxually.TechnicalTest.Controllers
         /// Registers a company for a VAT number in a given country
         /// </summary>
         [HttpPost]
+        [Route("register")]
         public async Task<ActionResult> Post([FromBody] VatRegistrationRequest request)
         {
             await _vatRegistration.RegisterAsync(request);

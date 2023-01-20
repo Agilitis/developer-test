@@ -23,10 +23,8 @@
     <ProjectReference Include="..\Taxually.Adapters.Queue\Taxually.Adapters.Queue.csproj" />
     <ProjectReference Include="..\Taxually.Core.Models\Taxually.Core.Models.csproj" />
     <ProjectReference Include="..\Taxually.Core\Taxually.Core.csproj" />
-    <ProjectReference Include="..\Taxually.IntegrationTests\Taxually.IntegrationTests.csproj" />
     <ProjectReference Include="..\Taxually.Ports.Inbound\Taxually.Ports.Inbound.csproj" />
     <ProjectReference Include="..\Taxually.Ports.Outbound\Taxually.Ports.Outbound.csproj" />
-    <ProjectReference Include="..\Taxually.UnitTests\Taxually.UnitTests.csproj" />
   </ItemGroup>
 
 </Project>
